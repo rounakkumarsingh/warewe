@@ -1,0 +1,31 @@
+{
+	"name": "backend",
+	"type": "module",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"migrate:create": "bunx mikro-orm migration:create",
+		"migrate:up": "bunx mikro-orm migration:up",
+		"migrate:down": "bunx mikro-orm migration:down",
+		"schema:create": "bunx mikro-orm schema:create",
+		"schema:update": "bunx mikro-orm schema:update",
+		"schema:drop": "bunx mikro-orm schema:drop"
+	},
+	"dependencies": {
+		"@hono/zod-validator": "^0.7.2",
+		"@mikro-orm/core": "^6.5.1",
+		"@mikro-orm/migrations": "^6.5.1",
+		"@mikro-orm/postgresql": "^6.5.1",
+		"@mikro-orm/reflection": "^6.5.1",
+		"hono": "^4.9.5",
+		"zod": "^4.1.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.2",
+		"@mikro-orm/cli": "^6.5.1",
+		"@types/bun": "^1.2.21",
+		"typescript": "^5.9.2",
+		"wrangler": "^4.4.0"
+	}
+}
