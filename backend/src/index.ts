@@ -131,12 +131,22 @@ app.get("/api/history", async (c) => {
 	try {
 		const orm = c.get("orm");
 		const em = orm.em.fork();
-		const records = await em.find(
+
+		const page = parseInt(c.req.query("page") ?? "1", 10);
+		const limit = parseInt(c.req.query("limit") ?? "20", 10);
+		const offset = (page - 1) * limit;
+
+		const [records, total] = await em.findAndCount(
 			RequestHistory,
 			{},
-			{ orderBy: { id: "desc" } },
+			{
+				orderBy: { id: "desc" },
+				limit,
+				offset,
+			},
 		);
-		return c.json(records, 200);
+
+		return c.json({ records, total, page, limit }, 200);
 	} catch (error) {
 		console.error(error);
 		return c.text("Error occurred while fetching request history", 500);
