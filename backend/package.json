@@ -1,16 +1,13 @@
 {
 	"name": "backend",
-	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
-		"deploy": "wrangler deploy --minify",
-		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
-		"migrate:create": "bunx mikro-orm migration:create",
-		"migrate:up": "bunx mikro-orm migration:up",
-		"migrate:down": "bunx mikro-orm migration:down",
-		"schema:create": "bunx mikro-orm schema:create",
-		"schema:update": "bunx mikro-orm schema:update",
-		"schema:drop": "bunx mikro-orm schema:drop"
+		"dev": "bun run --hot src/index.ts",
+		"migrate:create": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm migration:create --config=./src/db/mikro-orm.config.ts",
+		"migrate:up": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm migration:up --config=./src/db/mikro-orm.config.ts",
+		"migrate:down": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm migration:down --config=./src/db/mikro-orm.config.ts",
+		"schema:create": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm schema:create --config=./src/db/mikro-orm.config.ts",
+		"schema:update": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm schema:update --config=./src/db/mikro-orm.config.ts",
+		"schema:drop": "NODE_OPTIONS='--no-warnings --loader ts-node/esm' bunx mikro-orm schema:drop --config=./src/db/mikro-orm.config.ts"
 	},
 	"dependencies": {
 		"@hono/zod-validator": "^0.7.2",
@@ -25,7 +22,7 @@
 		"@biomejs/biome": "^2.2.2",
 		"@mikro-orm/cli": "^6.5.1",
 		"@types/bun": "^1.2.21",
-		"typescript": "^5.9.2",
-		"wrangler": "^4.4.0"
+		"ts-node": "^10.9.2",
+		"typescript": "^5.9.2"
 	}
 }

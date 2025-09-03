@@ -13,5 +13,6 @@
 		"lib": ["ESNext"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx"
-	}
+	},
+	"ts-node": { "esm": true, "transpileOnly": true }
 }
