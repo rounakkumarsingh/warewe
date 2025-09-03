@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:80" # Vite build served at http://localhost:5173
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    restart: always
